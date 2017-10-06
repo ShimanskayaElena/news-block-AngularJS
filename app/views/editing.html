@@ -1,0 +1,66 @@
+<!--Редактирование старой статьи либо создание новой статьи-->
+<div class="container-fluid" ng-controller="EditingCtrl">
+  <div class="row">
+    <div class="col-xs-8 col-md-8">
+<form name="myForm" novalidate ng-submit="saveOrEdit(currentArticle)">
+  <div class="well">
+
+    <div class="form-group">
+        <label>Serial Number</label>
+        <input type="number" name="articleNumber" class="form-control" ng-model="currentArticle.serialNumber" ng-required="requireValue">
+        <div class="error" ng-show="myForm.articleNumber.$invalid && myForm.articleNumber.$dirty">
+          {{getError(myForm.articleNumber.$error)}}
+        </div>
+    </div>
+      
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" name="articleTitle" class="form-control" ng-model="currentArticle.title" ng-required="requireValue" ng-pattern="matchPattern">
+        <div class="error" ng-show="myForm.articleTitle.$invalid && myForm.articleTitle.$dirty">
+          {{getError(myForm.articleTitle.$error)}}
+        </div>
+    </div>
+      
+    <div class="form-group">
+        <h3>Image</h3>
+        <div class="thumbnail">
+          <div class="caption">
+
+            <img class="thumb" ng-src="./images/{{currentArticle.image}}" alt="{{currentArticle.image}}" ng-cloak>
+            <!--"{{'./images/' + currentArticle.image}}"-->
+              <!--<img ng-src="{{img.thumbnailUrl}}" alt="{{img.title}}" ng-cloak>-->
+            <!-- редактирование фото--><!--ng-show="img.thumbnailUrl"-->
+            <div ng-show="currentArticle.image">
+              <button type="button" class="btn btn-primary" ng-click="editOrDeleteImage(currentArticle)">Edit Image</button> 
+              <button type="button" class="btn btn-default" ng-click="editOrDeleteImage(currentArticle)">Delete Image</button>
+            </div>
+
+            <!--добавление новой статьи и фото--><!--ng-hide="img.thumbnailUrl"-->
+            <div ng-hide="currentArticle.image">
+
+               <input id="selectFile" type="file" name="articleImage" accept="image/*" show-img nameimg="currentArticle.image" ng-model="currentArticle.image">
+               <!--nameimg="img.thumbnailUrl" ng-model="img.thumbnailUrl"--> 
+               <div class="error" ng-show="currentArticle.image == ''">file size larger than 100 KB</div>
+            
+            </div>
+          </div>
+        </div>     
+      </div>
+    
+      
+      <div class="form-group">
+        <label>Text</label>
+        <textarea name="articleText" cols="15" rows="2" wrap="hard" class="form-control" ng-model="currentArticle.body" ng-required="requireValue" ng-pattern="matchPattern"></textarea>
+        <div class="error" ng-show="myForm.articleText.$invalid && myForm.articleText.$dirty">
+          {{getError(myForm.articleText.$error)}}
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid">Save</button>
+      <button type="button" class="btn btn-primary" ng-click="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+</form>
+    </div>
+  </div>
+</div>

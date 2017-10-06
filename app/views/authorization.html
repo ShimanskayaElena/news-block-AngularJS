@@ -1,0 +1,51 @@
+<div class="col-md-5" ng-controller="AuthorizationCtrl">
+  <form name="myForm" novalidate ng-submit="signIn(user)">
+    <div class="well">
+      <div class="form-group">
+        <label>Login:</label>
+        <input type="text" name="userLogin" class="form-control" ng-model="user.login" ng-required="requireValue" ng-minlength="3" ng-maxlength="8" ng-pattern="matchPattern">
+        <div class="error" ng-show="myForm.userLogin.$invalid && myForm.userLogin.$dirty">
+          {{getError(myForm.userLogin.$error)}}
+          <!--<span ng-show="myForm.userLogin.$error.required">
+            Field must not be empty! Please enter your login!
+          </span>
+          <span ng-show="myForm.userLogin.$error.minlength">
+            Incorrect login! Login must contain at least 3 characters!
+          </span>
+          <span ng-show="myForm.userLogin.$error.maxlength">
+            Incorrect login! Login should contain no more than 8 characters!
+          </span>
+          <span ng-show="myForm.userLogin.$error.pattern">
+            Login must contain at least one letter of the Latin alphabet!
+          </span>-->
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" name="userPassword" class="form-control" ng-model="user.password" ng-required="requireValue" ng-minlength="4" ng-maxlength="8">
+        <div class="error" ng-show="myForm.userPassword.$invalid && myForm.userPassword.$dirty">
+          {{getError(myForm.userPassword.$error)}}
+          <!--<span ng-show="myForm.userPassword.$error.required">
+            field must not be empty! Please enter your password!
+          </span>
+          <span ng-show="myForm.userPassword.$error.minlength">
+            Incorrect Password! Password must contain at least 4 characters!
+          </span>
+          <span ng-show="myForm.userPassword.$error.maxlength">
+            Incorrect Password! Password must contain no more than 8 characters!
+          </span>-->
+          <!--<span ng-show="myForm.userPassword.$invalid">
+            incorrect password!
+          </span>-->
+        </div>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="userRole" ng-model="user.roleAdmin">
+          Enter the administrator's rights
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" ng-disabled="myForm.$invalid">Sing in </button>
+    </div>
+  </form> 
+</div>

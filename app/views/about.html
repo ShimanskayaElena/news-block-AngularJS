@@ -1,0 +1,13 @@
+<div class="panel panel-primary"  ng-cloak ng-controller="AboutCtrl">
+  <h3 class="panel-heading">{{article.title}}</h3>
+  <div class="panel-body">
+    <!--<img src="{{img.thumbnailUrl}}" alt="{{img.title}}" ng-cloak>-->
+    <img class="min-thumb" ng-src="./images/{{article.image}}" alt="{{article.image}}" ng-cloak>
+    <p>{{article.body}}</p>
+  </div>
+</div>
+<div>
+  <button class="btn btn-default" ng-click="getHome()">
+    Вернуться к списку новостей
+  </button>
+</div>

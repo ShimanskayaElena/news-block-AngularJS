@@ -1,0 +1,39 @@
+<!--представление для отображения всех новостей либо для редактирования новостей админом-->
+
+<div class="container"  ng-cloak>
+  <div class="panel panel-primary">
+    <h3 class="panel-heading">NEWS</h3>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody search-articles article="data">
+          <tr ng-repeat="article in articles | orderBy:'-serialNumber' | take:currentPage*pageSize:pageSize" ng-class="!showButton ? 'references':''">
+            <td>{{article.serialNumber}}</td>
+            <td id="{{article.id}}" >{{article.title}}</td>
+            <td class="text-center" ng-show="showButton">
+              <button class="btn btn-xs btn-primary" ng-click="editingNews(article)">Edit News</button>
+              <button class="btn btn-xs btn-primary" ng-click="deleteNews(article)">Delete News</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <button class="btn btn-primary"  ng-click="addNews()" ng-show="showButton">
+    Add News
+  </button>
+  
+  <div class="pagination-wrap">
+    <ul class="pagination">
+      <li ng-repeat="i in convertToArray(getNumberOfPages()) track by $index" ng-click="setCurrentPage($index)" ng-class="{'active': currentPage == $index}">
+        <a>{{$index +1}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
